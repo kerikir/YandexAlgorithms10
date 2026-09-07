@@ -1,7 +1,5 @@
 package blocks.stack.correctParenthesisSequence
 
-import java.util.Stack
-
 /*
     Ошибка в тестируемой среде
  */
@@ -9,7 +7,7 @@ import java.util.Stack
 
 fun main() {
     val n = readln().trim().toInt()
-    val parenthesis = readln().trim().toList()
+    val parenthesis = readln().trim()
     val string = readln().trim()
 
     val closingParenthesis = mutableMapOf<Char, Char>(
@@ -17,30 +15,34 @@ fun main() {
         ')' to '('
     )
 
-    val stack = Stack<Char>()
+    val stack = ArrayDeque<Char>()
     for (char in string) {
         if (char in closingParenthesis) {
-            stack.pop()
+            if (stack.isNotEmpty())
+                stack.removeLast()
         } else {
-            stack.push(char)
+            stack.addLast(char)
         }
     }
 
     val result = mutableListOf<Char>()
-    var remain = n - string.length
+    string.forEach { char ->
+        result.add(char)
+    }
 
+    var remain = n - string.length
     while (remain > 0) {
 
         for (ch in parenthesis) {
 
-            if (ch in closingParenthesis && stack.isNotEmpty() && stack.peek() == closingParenthesis[ch]) {
+            if (ch in closingParenthesis && stack.isNotEmpty() && stack.last() == closingParenthesis[ch]) {
                 result.add(ch)
-                stack.pop()
+                stack.removeLast()
                 break
 
             } else if (ch !in closingParenthesis && remain >= stack.size + 2) {
                 result.add(ch)
-                stack.push(ch)
+                stack.addLast(ch)
                 break
             }
         }
@@ -48,5 +50,5 @@ fun main() {
         remain--
     }
 
-    println(string + result.joinToString(""))
+    println(result.joinToString(""))
 }
