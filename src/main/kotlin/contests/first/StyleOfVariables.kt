@@ -1,5 +1,18 @@
 package contests.first
 
+/*
+
+Задача: Смена стиля - изменить стиль именования переменных
+
+Сложность = O(N * S)
+Ограничения: 1 <= N <= 100
+             1 <= S <= 1_000
+
+Время = 251ms
+Память = 28.23MB
+
+ */
+
 fun main() {
     val n = readln().trim().toInt()
     val words = ArrayList<String>(n)
