@@ -25,23 +25,20 @@ fun main() {
         }
     }
 
-    val result = mutableListOf<Char>()
-    string.forEach { char ->
-        result.add(char)
-    }
-
+    val result = StringBuilder(string)
     var remain = n - string.length
+
     while (remain > 0) {
 
         for (ch in parenthesis) {
 
             if (ch in closingParenthesis && stack.isNotEmpty() && stack.last() == closingParenthesis[ch]) {
-                result.add(ch)
+                result.append(ch)
                 stack.removeLast()
                 break
 
             } else if (ch !in closingParenthesis && remain >= stack.size + 2) {
-                result.add(ch)
+                result.append(ch)
                 stack.addLast(ch)
                 break
             }
@@ -50,5 +47,5 @@ fun main() {
         remain--
     }
 
-    println(result.joinToString(""))
+    println(result.toString())
 }
