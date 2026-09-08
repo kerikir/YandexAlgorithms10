@@ -43,5 +43,42 @@ fun main() {
         result.append(stackOperators.pop())
     }
 
-    println(result.toString())
+    val stack = Stack<Int>()
+    for (element in result.toString()) {
+        when(element) {
+
+            '^' -> {
+                val b = stack.pop()
+                val a = stack.pop()
+                stack.push(a xor b)
+            }
+
+            '!' -> {
+                val a = stack.pop()
+                if (a == 0) {
+                    stack.push(1)
+                } else {
+                    stack.push(0)
+                }
+            }
+
+            '&' -> {
+                val b = stack.pop()
+                val a = stack.pop()
+                stack.push(a and b)
+            }
+
+            '|' -> {
+                val b = stack.pop()
+                val a = stack.pop()
+                stack.push(a or b)
+            }
+
+            else -> {
+                stack.push(element.digitToInt())
+            }
+        }
+    }
+
+    println(stack.first())
 }
