@@ -2,6 +2,19 @@ package blocks.stack.infixAndPostfixEntries
 
 import java.util.Stack
 
+/*
+
+Задача: Значение логического выражения - определить значение логического выражения (0 или 1)
+
+Сложность = O(N)
+Ограничения: 1 <= N <= 100
+             0 <= Ai <= 1
+
+Время = 146ms
+Память = 24.2MB
+
+ */
+
 fun main() {
     var expression = readln().trim()
 
