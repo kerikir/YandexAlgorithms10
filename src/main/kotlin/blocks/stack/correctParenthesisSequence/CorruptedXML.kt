@@ -17,5 +17,16 @@ fun String.isCorrectXML(): Boolean {
         .toList()
 
     val stack = Stack<String>()
-    return false
+    for (tag in tags) {
+        if (tag[0] == '/') {
+            if (stack.isNotEmpty() && stack.peek() == tag.substring(1)) {
+                stack.pop()
+            } else {
+                return false
+            }
+        } else {
+            stack.push(tag)
+        }
+    }
+    return stack.isEmpty()
 }
