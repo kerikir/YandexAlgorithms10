@@ -1,5 +1,18 @@
 package blocks.stack.recursionAndMechanismLaunchingFunctions
 
+/*
+
+Задача: Быстрое возведение в степень - определить результат возведения в степень действительного числа
+
+Сложность = O(logN)
+Ограничения: 0 <= N <= 1_000_000_000
+
+Время = 107ms
+Память = 19.91MB
+
+ */
+
+
 fun main() {
     val a = readln().trim().toDouble()
     val n = readln().trim().toInt()
