@@ -5,8 +5,46 @@ import java.util.Stack
 fun main() {
     val string = readln().trim()
 
+    val symbols = mutableMapOf<Char, Int>()
+    for (char in string) {
+        symbols[char] = symbols.getOrDefault(char, 0) + 1
+    }
 
-    println(string.isCorrectXML())
+    val setSymbols = setOf(
+        '<', '>', '/',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g',
+        'h', 'i', 'j', 'k', 'l', 'm', 'n',
+        'o', 'p', 'q', 'r', 's', 't', 'u',
+        'v', 'w', 'x', 'y', 'z'
+    )
+
+    val result = when {
+        symbols['<'] != symbols['>'] -> {
+            
+        }
+
+        symbols['/'] != symbols['<']!! / 2 -> {
+
+        }
+
+        else -> {
+            var char = 'a'
+            var count = symbols.getOrDefault(char, 0)
+            for (ch in 'b'..'z') {
+                if (
+                    symbols.getOrDefault(ch, 0) % 2 != 0 &&
+                    symbols.getOrDefault(ch, 0) > count
+                ) {
+                    char = ch
+                    count = symbols.getOrDefault(char, 0)
+                }
+            }
+
+            println(char)
+        }
+    }
+
+    println(result)
 }
 
 
