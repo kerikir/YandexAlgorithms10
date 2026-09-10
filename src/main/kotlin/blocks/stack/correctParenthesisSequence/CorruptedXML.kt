@@ -18,32 +18,7 @@ fun main() {
         'v', 'w', 'x', 'y', 'z'
     )
 
-    val result = when {
-        symbols['<'] != symbols['>'] -> {
-            
-        }
-
-        symbols['/'] != symbols['<']!! / 2 -> {
-
-        }
-
-        else -> {
-            var char = 'a'
-            var count = symbols.getOrDefault(char, 0)
-            for (ch in 'b'..'z') {
-                if (
-                    symbols.getOrDefault(ch, 0) % 2 != 0 &&
-                    symbols.getOrDefault(ch, 0) > count
-                ) {
-                    char = ch
-                    count = symbols.getOrDefault(char, 0)
-                }
-            }
-
-            println(char)
-        }
-    }
-
+    val result = replaceSymbols(string, symbols, setSymbols)
     println(result)
 }
 
@@ -67,4 +42,62 @@ fun String.isCorrectXML(): Boolean {
         }
     }
     return stack.isEmpty()
+}
+
+
+fun replaceSymbols(string: String, symbols: Map<Char, Int>, setSymbols: Set<Char>): String {
+    when {
+        symbols['<'] != symbols['>'] -> {
+            string.forEachIndexed { index, char ->
+                if (char == '<' || char == '>') {
+                    for (swap in setSymbols) {
+                        val str = StringBuilder(string).setCharAt(index, swap).toString()
+                        if (str.isCorrectXML()) {
+                            return str
+                        }
+                    }
+                }
+            }
+        }
+
+        symbols['/'] != symbols['<']!! / 2 -> {
+            string.forEachIndexed { index, char ->
+                for (swap in setSymbols) {
+                    val str = StringBuilder(string).setCharAt(index, swap).toString()
+                    if (str.isCorrectXML()) {
+                        return str
+                    }
+                }
+            }
+        }
+
+        else -> {
+            var char = 'a'
+            var count = symbols.getOrDefault(char, 0)
+            for (ch in 'b'..'z') {
+                if (
+                    symbols.getOrDefault(ch, 0) % 2 != 0 &&
+                    symbols.getOrDefault(ch, 0) > count
+                ) {
+                    char = ch
+                    count = symbols.getOrDefault(char, 0)
+                }
+            }
+
+            string.forEachIndexed { index, ch ->
+                if (ch == char) {
+                    for (swap in setSymbols) {
+                        val sb = StringBuilder(string)
+                        sb.setCharAt(index, swap)
+                        val str = sb.toString()
+                        if (str.isCorrectXML()) {
+                            return str
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return string
 }
