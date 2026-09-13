@@ -7,9 +7,19 @@ fun main() {
     val mainRoad = readln().trim().split(Regex("\\s+")).map { it.toInt() - 1 }
 
     var maxTime = 0
-    val queueRoads = Array<ArrayDeque<Pair<Int, Int>>>(4) { ArrayDeque<Pair<Int, Int>>() }
+    val rovers = mutableListOf<Triple<Int, Int, Int>>()
     repeat(n) { index ->
         val (d, t) = readln().trim().split(Regex("\\s+")).map { it.toInt() }
+        rovers.add(Triple(t, d, index))
+        if (maxTime < t) maxTime = t
+    }
+    val roversSorted = rovers.sortedWith(
+        compareBy<Triple<Int, Int, Int>>({ it.first }, { it.second }, { it.third })
+    )
+
+    val queueRoads = Array<ArrayDeque<Pair<Int, Int>>>(4) { ArrayDeque<Pair<Int, Int>>() }
+    repeat(n) {
+        val (t, d, index) = roversSorted[it]
         queueRoads[d - 1].addLast(index to t)
         if (maxTime < t) maxTime = t
     }
