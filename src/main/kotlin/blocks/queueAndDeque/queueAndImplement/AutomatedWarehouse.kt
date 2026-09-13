@@ -2,6 +2,18 @@ package blocks.queueAndDeque.queueAndImplement
 
 import java.util.Stack
 
+/*
+
+Задача: Автоматизированный склад - определить порядок проезда машин на перекрестке
+
+Сложность = O(N * logN)
+Ограничения: нет данных
+
+Время = 195ms
+Память = 25.53MB
+
+ */
+
 fun main() {
     val n = readln().trim().toInt()
     val mainRoad = readln().trim().split(Regex("\\s+")).map { it.toInt() - 1 }
