@@ -42,5 +42,5 @@ fun main() {
         result.add(deque.peekFirst())
     }
 
-    result.joinToString("\n").also(::println)
+    println(result.joinToString("\n"))
 }
