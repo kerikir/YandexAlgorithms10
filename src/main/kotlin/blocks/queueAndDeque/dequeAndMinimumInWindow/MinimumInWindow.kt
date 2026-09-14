@@ -1,5 +1,10 @@
 package blocks.queueAndDeque.dequeAndMinimumInWindow
 
+import java.io.BufferedReader
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
 import java.util.ArrayDeque
 
 /*
@@ -16,8 +21,11 @@ import java.util.ArrayDeque
  */
 
 fun main() {
-    val (n, k) = readln().trim().split(' ').map { it.toInt() }
-    val array = readln().trim().split(' ').map { it.toInt() }
+    val reader = BufferedReader(FileReader(File("input.txt")))
+    val writer = BufferedWriter(FileWriter(File("output.txt")))
+
+    val (n, k) = reader.readLine().trim().split(' ').map { it.toInt() }
+    val array = reader.readLine().trim().split(' ').map { it.toInt() }
 
     val deque = ArrayDeque<Int>()
     for (i in 0..<k) {
@@ -42,5 +50,10 @@ fun main() {
         result.add(deque.peekFirst())
     }
 
-    println(result.joinToString("\n"))
+    for (value in result) {
+        writer.write(value.toString())
+        writer.newLine()
+    }
+    reader.close()
+    writer.close()
 }
