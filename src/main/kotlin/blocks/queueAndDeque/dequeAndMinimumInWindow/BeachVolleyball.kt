@@ -1,15 +1,19 @@
 package blocks.queueAndDeque.dequeAndMinimumInWindow
 
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileReader
 import java.util.ArrayDeque
 
 fun main() {
-    val n = readln().trim().toInt()
-    val power = readln().trim().split(Regex("\\s+")).map { it.toInt() }
-    val q = readln().trim().toInt()
-    val watch = mutableListOf<Long>()
+    val reader = BufferedReader(FileReader(File("input.txt")))
+    val n = reader.readLine().trim().toInt()
+    val power = reader.readLine().trim().split(' ').map { it.toInt() }
+    val q = reader.readLine().trim().toInt()
+    val watch = ArrayList<Long>(q)
     var maxGame = 0L
     repeat(q) {
-        val k = readln().trim().toLong()
+        val k = reader.readLine().trim().toLong()
         watch.add(k)
         if (maxGame < k) maxGame = k
     }
