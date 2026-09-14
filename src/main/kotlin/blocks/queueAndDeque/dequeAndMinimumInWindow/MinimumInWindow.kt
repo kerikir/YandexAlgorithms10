@@ -16,8 +16,8 @@ import java.util.ArrayDeque
  */
 
 fun main() {
-    val (n, k) = readln().trim().split(Regex("\\s+")).map { it.toInt() }
-    val array = readln().trim().split(Regex("\\s+")).map { it.toInt() }
+    val (n, k) = readln().trim().split(' ').map { it.toInt() }
+    val array = readln().trim().split(' ').map { it.toInt() }
 
     val deque = ArrayDeque<Int>()
     for (i in 0..<k) {
@@ -27,7 +27,7 @@ fun main() {
         deque.offerLast(array[i])
     }
 
-    val result = mutableListOf<Int>()
+    val result = ArrayList<Int>(n - k + 1)
     result.add(deque.peekFirst())
     for (i in k..<n) {
         if (deque.isNotEmpty() && deque.peekFirst() == array[i - k]) {
