@@ -5,7 +5,6 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
-import java.util.ArrayDeque
 
 /*
 
@@ -29,25 +28,25 @@ fun main() {
 
     val deque = ArrayDeque<Int>()
     for (i in 0..<k) {
-        while (deque.isNotEmpty() && deque.peekLast() > array[i]) {
-            deque.pollLast()
+        while (deque.isNotEmpty() && deque.last() > array[i]) {
+            deque.removeLast()
         }
-        deque.offerLast(array[i])
+        deque.addLast(array[i])
     }
 
     val result = ArrayList<Int>(n - k + 1)
-    result.add(deque.peekFirst())
+    result.add(deque.first())
     for (i in k..<n) {
-        if (deque.isNotEmpty() && deque.peekFirst() == array[i - k]) {
-            deque.pollFirst()
+        if (deque.isNotEmpty() && deque.first() == array[i - k]) {
+            deque.removeFirst()
         }
 
-        while (deque.isNotEmpty() && deque.peekLast() > array[i]) {
-            deque.pollLast()
+        while (deque.isNotEmpty() && deque.last() > array[i]) {
+            deque.removeLast()
         }
-        deque.offerLast(array[i])
+        deque.addLast(array[i])
 
-        result.add(deque.peekFirst())
+        result.add(deque.first())
     }
 
     for (value in result) {
