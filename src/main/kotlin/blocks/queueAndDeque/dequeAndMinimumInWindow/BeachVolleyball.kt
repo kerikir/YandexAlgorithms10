@@ -24,13 +24,13 @@ fun main() {
     val watchingGames = watch.toSet()
     val deque = ArrayDeque<Int>(power)
 
-    val result = mutableMapOf<Long, String>()
+    val result = mutableMapOf<Long, Pair<Int, Int>>()
     for (index in 1..maxGame) {
         val a = deque.removeFirst()
         val b = deque.removeFirst()
 
         if (index in watchingGames) {
-            result[index] = "$a $b"
+            result[index] = a to b
         }
 
         if (a > b) {
@@ -43,8 +43,7 @@ fun main() {
     }
 
     for (index in watch) {
-        writer.write(result[index].toString())
-        writer.newLine()
+        writer.write("${result[index]!!.first} ${result[index]!!.second}\n")
     }
     reader.close()
     writer.close()
