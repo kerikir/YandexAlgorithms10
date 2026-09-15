@@ -16,7 +16,7 @@ package blocks.sorting.quickSort
 
 fun main() {
     val n = readln().trim().toInt()
-    val array = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
+    val array = readln().trim().split(' ').filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
 
     quickSort(array, 0, array.lastIndex)
 
@@ -27,13 +27,23 @@ fun main() {
 fun quickSort(array: IntArray, left: Int, right: Int) {
     if (left >= right) return
 
-    val middle = left + (right - left) / 2
-    val value = array[middle]
-    val p = partition(array, left, right) {
-        it <= value
+    var l = left
+    var r = right
+    while (l < r) {
+        val middle = l + (r - l) / 2
+        val value = array[middle]
+        val p = partition(array, l, r) {
+            it <= value
+        }
+
+        if (p < (l + r) / 2) {
+            quickSort(array, l, p)
+            l = p + 1
+        } else {
+            quickSort(array, p + 1, r)
+            r = p
+        }
     }
-    quickSort(array, left, p)
-    quickSort(array, p + 1, right)
 }
 
 
