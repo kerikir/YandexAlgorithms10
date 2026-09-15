@@ -1,5 +1,19 @@
 package blocks.sorting.quickSort
 
+/*
+
+Задача: Partition - определить индекс элемента при разбиении массива для быстрой сортировки
+
+Сложность = O(N)
+Ограничения: 0 <= N <= 1_000_000
+             -1_000_000_000 <= Ai <= 1_000_000_000
+
+Время = 1s
+Память = 134.63MB
+
+ */
+
+
 fun main() {
     val n = readln().trim().toInt()
     val array = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
