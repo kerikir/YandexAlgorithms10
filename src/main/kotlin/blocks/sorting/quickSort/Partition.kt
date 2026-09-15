@@ -19,7 +19,7 @@ fun main() {
     val array = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
     val x = readln().trim().toInt()
 
-    val index = partition(array, 0, array.lastIndex) {
+    val index = partition1(array, 0, array.lastIndex) {
         it < x
     }
 
@@ -28,7 +28,7 @@ fun main() {
 }
 
 
-fun partition(array: IntArray, left: Int, right: Int, predicate: (Int) -> Boolean): Int {
+fun partition1(array: IntArray, left: Int, right: Int, predicate: (Int) -> Boolean): Int {
     var l = left
     var r = right
 
