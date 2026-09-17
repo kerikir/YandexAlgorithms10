@@ -1,5 +1,6 @@
 package blocks.sorting.ordinalStatistics
 
+import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
@@ -40,7 +41,31 @@ fun main() {
         middle
     }
 
+    val cities = coords.toSet()
+
     val d = ceil(sqrt(n.toDouble())).toInt() + 1
+    var min = Int.MAX_VALUE
+    var capital = coords.first()
+    for (i in -d..d) {
+        for (j in -d..d) {
+            val x = middleX + i
+            val y = middleY + j
+
+            if ((x to y) !in cities) {
+                var s = 0
+                for ((cityX, cityY) in coords) {
+                    s += abs(x - cityX) + abs(y - cityY)
+                }
+
+                if (s < min) {
+                    min = s
+                    capital = x to y
+                }
+            }
+        }
+    }
+
+    println("${capital.first} ${capital.second}")
 }
 
 
