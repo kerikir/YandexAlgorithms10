@@ -1,8 +1,6 @@
 package blocks.sorting.ordinalStatistics
 
 import kotlin.math.abs
-import kotlin.math.ceil
-import kotlin.math.sqrt
 
 /*
 
@@ -13,7 +11,7 @@ import kotlin.math.sqrt
              1 <= Ai <= 100
 
 Время = 171ms
-Память = 24.54MB
+Память = 24.63MB
 
  */
 
