@@ -1,7 +1,46 @@
 package blocks.sorting.ordinalStatistics
 
-fun main() {
+import kotlin.math.ceil
+import kotlin.math.sqrt
 
+
+fun main() {
+    val n = readln().trim().toInt()
+    val coords = mutableListOf<Pair<Int, Int>>()
+    repeat(n) {
+        val (x, y) = readln().trim().split(' ').map { it.toInt() }
+        coords.add(x to y)
+    }
+
+    val arrX = coords.map { it.first }.toIntArray()
+    val arrY = coords.map { it.second }.toIntArray()
+
+    val middleX = if (n % 2 == 0) {
+        val index1 = n / 2 - 1
+        val index2 = n / 2
+        val middle1 = searchOrdinalStatistics(arrX, index1)
+        val middle2 = searchOrdinalStatistics(arrX, index2)
+        (middle1 + middle2) / 2
+    } else {
+
+        val index = n / 2
+        val middle = searchOrdinalStatistics(arrX, index)
+        middle
+    }
+    val middleY = if (n % 2 == 0) {
+        val index1 = n / 2 - 1
+        val index2 = n / 2
+        val middle1 = searchOrdinalStatistics(arrY, index1)
+        val middle2 = searchOrdinalStatistics(arrY, index2)
+        (middle1 + middle2) / 2
+    } else {
+
+        val index = n / 2
+        val middle = searchOrdinalStatistics(arrY, index)
+        middle
+    }
+
+    val d = ceil(sqrt(n.toDouble())).toInt() + 1
 }
 
 
