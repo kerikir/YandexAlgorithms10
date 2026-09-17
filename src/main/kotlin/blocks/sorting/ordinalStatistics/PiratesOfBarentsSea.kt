@@ -21,12 +21,11 @@ fun main() {
     val n = readln().trim().toInt()
     val coords = mutableListOf<Pair<Int, Int>>()
     repeat(n) {
-        val (x, y) = readln().trim().split(' ').map { it.toInt() }
-        coords.add(x to y)
+        val (row, column) = readln().trim().split(Regex("\\s+")).map { it.toInt() }
+        coords.add(row to column)
     }
 
-    val arrX = coords.map { it.first }.toIntArray()
-    val arrY = coords.map { it.second }.toIntArray()
+    val arrX = coords.map { it.second }.toIntArray()
 
     val middleX = if (n % 2 == 0) {
         val index1 = n / 2 - 1
@@ -40,44 +39,18 @@ fun main() {
         val middle = searchOrdinalStatistics(arrX, index)
         middle
     }
-    val middleY = if (n % 2 == 0) {
-        val index1 = n / 2 - 1
-        val index2 = n / 2
-        val middle1 = searchOrdinalStatistics(arrY, index1)
-        val middle2 = searchOrdinalStatistics(arrY, index2)
-        (middle1 + middle2) / 2
-    } else {
 
-        val index = n / 2
-        val middle = searchOrdinalStatistics(arrY, index)
-        middle
+    val sortedShips = coords.sortedWith(
+        compareBy<Pair<Int, Int>> { it.first }
+            .thenBy { it.second }
+    )
+
+    val arrayDistances = IntArray(n)
+    for (i in arrayDistances.indices) {
+        arrayDistances[i] = abs(sortedShips[i].second - middleX) + abs(sortedShips[i].first - (i + 1))
     }
 
-    val cities = coords.toSet()
-
-    val d = ceil(sqrt(n.toDouble())).toInt() + 1
-    var min = Int.MAX_VALUE
-    var capital = coords.first()
-    for (i in -d..d) {
-        for (j in -d..d) {
-            val x = middleX + i
-            val y = middleY + j
-
-            if ((x to y) !in cities) {
-                var s = 0
-                for ((cityX, cityY) in coords) {
-                    s += abs(x - cityX) + abs(y - cityY)
-                }
-
-                if (s < min) {
-                    min = s
-                    capital = x to y
-                }
-            }
-        }
-    }
-
-    println("${capital.first} ${capital.second}")
+    println(arrayDistances.sum())
 }
 
 
