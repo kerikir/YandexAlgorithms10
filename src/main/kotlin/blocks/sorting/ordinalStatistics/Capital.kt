@@ -79,14 +79,14 @@ fun searchOrdinalStatistics(array: IntArray, k: Int): Int {
         arrayX.sort()
         val x = arrayX[1]
 
-        val p = partition(array, left, right) {
-            it < x
-        }
+        val (eq, gr) = partition(array, left, right, x)
 
-        if (p <= k) {
-            right = p
+        if (k < eq) {
+            right = eq - 1
+        } else if (k >= gr) {
+            left = gr
         } else {
-            left = p + 1
+            return array[k]
         }
     }
 
@@ -94,24 +94,29 @@ fun searchOrdinalStatistics(array: IntArray, k: Int): Int {
 }
 
 
-fun partition(array: IntArray, left: Int, right: Int, predicate: (Int) -> Boolean): Int {
-    var l = left
-    var r = right
+fun partition(array: IntArray, left: Int, right: Int, x: Int): Pair<Int, Int> {
+    var equals = left
+    var greatest = left
+    var now = left
 
-    while (l <= r) {
-        while (l <= right && predicate(array[l])) {
-            l++
-        }
-        while (r >= left && !predicate(array[r])) {
-            r--
+    while (now <= right) {
+        if (array[now] < x) {
+            val temp = array[now]
+            array[now] = array[greatest]
+            array[greatest] = array[equals]
+            array[equals] = temp
+            equals++
+            greatest++
+
+        } else if (array[now] == x) {
+            val temp = array[now]
+            array[now] = array[greatest]
+            array[greatest] = temp
+            greatest++
         }
 
-        if (r > l) {
-            val temp = array[l]
-            array[l] = array[r]
-            array[r] = temp
-        }
+        now++
     }
 
-    return l - 1
+    return equals to greatest
 }
