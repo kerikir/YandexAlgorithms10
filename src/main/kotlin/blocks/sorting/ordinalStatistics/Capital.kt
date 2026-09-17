@@ -4,6 +4,18 @@ import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.sqrt
 
+/*
+
+Задача: Столица - определить координаты столицы для быстрой дороги в другие города
+
+Сложность = O(N * logN * logN)
+Ограничения: 1 <= N <= 100
+             -1_000 <= Ai <= 1_000
+
+Время = 171ms
+Память = 24.54MB
+
+ */
 
 fun main() {
     val n = readln().trim().toInt()
