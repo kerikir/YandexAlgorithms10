@@ -31,25 +31,25 @@ fun main() {
     val middleX = if (n % 2 == 0) {
         val index1 = n / 2 - 1
         val index2 = n / 2
-        val middle1 = searchOrdinalStatistics(arrX, index1)
-        val middle2 = searchOrdinalStatistics(arrX, index2)
+        val middle1 = searchOrdinalStatistics1(arrX, index1)
+        val middle2 = searchOrdinalStatistics1(arrX, index2)
         (middle1 + middle2) / 2
     } else {
 
         val index = n / 2
-        val middle = searchOrdinalStatistics(arrX, index)
+        val middle = searchOrdinalStatistics1(arrX, index)
         middle
     }
     val middleY = if (n % 2 == 0) {
         val index1 = n / 2 - 1
         val index2 = n / 2
-        val middle1 = searchOrdinalStatistics(arrY, index1)
-        val middle2 = searchOrdinalStatistics(arrY, index2)
+        val middle1 = searchOrdinalStatistics1(arrY, index1)
+        val middle2 = searchOrdinalStatistics1(arrY, index2)
         (middle1 + middle2) / 2
     } else {
 
         val index = n / 2
-        val middle = searchOrdinalStatistics(arrY, index)
+        val middle = searchOrdinalStatistics1(arrY, index)
         middle
     }
 
@@ -81,7 +81,7 @@ fun main() {
 }
 
 
-fun searchOrdinalStatistics(array: IntArray, k: Int): Int {
+fun searchOrdinalStatistics1(array: IntArray, k: Int): Int {
     var left = 0
     var right = array.lastIndex
 
@@ -91,7 +91,7 @@ fun searchOrdinalStatistics(array: IntArray, k: Int): Int {
         arrayX.sort()
         val x = arrayX[1]
 
-        val (eq, gr) = partition(array, left, right, x)
+        val (eq, gr) = partition1(array, left, right, x)
 
         if (k < eq) {
             right = eq - 1
@@ -106,7 +106,7 @@ fun searchOrdinalStatistics(array: IntArray, k: Int): Int {
 }
 
 
-fun partition(array: IntArray, left: Int, right: Int, x: Int): Pair<Int, Int> {
+fun partition1(array: IntArray, left: Int, right: Int, x: Int): Pair<Int, Int> {
     var equals = left
     var greatest = left
     var now = left
