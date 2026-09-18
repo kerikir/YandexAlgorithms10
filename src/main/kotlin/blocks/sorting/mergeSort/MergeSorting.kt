@@ -17,21 +17,21 @@ fun main() {
     val n = readln().trim().toInt()
     val array = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
 
-    mergeSort(array, 0, array.lastIndex)
+    mergeSort1(array, 0, array.lastIndex)
 
     println(array.joinToString(" "))
 }
 
 
-fun mergeSort(array: IntArray, left: Int, right: Int) {
+fun mergeSort1(array: IntArray, left: Int, right: Int) {
     if (left >= right) return
 
     val middle = (right + left) / 2
-    mergeSort(array, left, middle)
-    mergeSort(array, middle + 1, right)
+    mergeSort1(array, left, middle)
+    mergeSort1(array, middle + 1, right)
 
     val sortedArray = IntArray(right - left + 1)
-    mergeArrays(
+    mergeArrays2(
         array, left, middle,
         array, middle + 1, right,
         sortedArray, 0
@@ -43,7 +43,7 @@ fun mergeSort(array: IntArray, left: Int, right: Int) {
 }
 
 
-fun mergeArrays(
+fun mergeArrays2(
     array1: IntArray, start1: Int, end1: Int,
     array2: IntArray, start2: Int, end2: Int,
     arrayResult: IntArray, startIndex: Int
