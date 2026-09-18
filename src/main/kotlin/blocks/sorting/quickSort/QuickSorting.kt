@@ -27,24 +27,15 @@ fun main() {
 fun quickSort(array: IntArray, left: Int, right: Int) {
     if (left >= right) return
 
-    var l = left
-    var r = right
-    while (l < r) {
-        val middle = l + (r - l) / 2
-        val values = intArrayOf(array[l], array[middle], array[r])
-        values.sort()
-        val value = values[1]
+    val middle = left + (right - left) / 2
+    val values = intArrayOf(array[left], array[middle], array[right])
+    values.sort()
+    val value = values[1]
 
-        val (eq, gr) = partition(array, l, r, value)
+    val (eq, gr) = partition(array, left, right, value)
 
-        if (eq < (l + r) / 2) {
-            quickSort(array, l, eq - 1)
-            l = gr
-        } else {
-            quickSort(array, gr, r)
-            r = eq - 1
-        }
-    }
+    quickSort(array, left, eq - 1)
+    quickSort(array, gr, right)
 }
 
 
