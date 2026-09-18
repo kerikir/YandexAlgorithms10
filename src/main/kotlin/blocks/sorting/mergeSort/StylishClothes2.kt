@@ -1,5 +1,18 @@
 package blocks.sorting.mergeSort
 
+/*
+
+Задача: Стильная одежда 2 - определить цвета наиболее стильной одежды
+
+Сложность = O(N * logN)
+Ограничения: 1 <= N <= 100_000
+             1 <= Ai <= 100_000
+
+Время = 2s
+Память = 57.3MB
+
+ */
+
 fun main() {
     val numberOfCaps = readln().trim().toInt()
     val colorsOfCaps = readln().trim().split(Regex("\\s+")).map { it.toInt() }.toIntArray()
