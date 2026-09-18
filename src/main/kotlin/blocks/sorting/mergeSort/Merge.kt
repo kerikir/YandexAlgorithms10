@@ -21,13 +21,13 @@ fun main() {
     val array2 = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
 
     val result = IntArray(n + m)
-    mergeArrays(array1, 0, array1.lastIndex, array2, 0, array2.lastIndex, result, 0)
+    mergeArrays1(array1, 0, array1.lastIndex, array2, 0, array2.lastIndex, result, 0)
 
     println(result.joinToString(" "))
 }
 
 
-fun mergeArrays(
+fun mergeArrays1(
     array1: IntArray, start1: Int, end1: Int,
     array2: IntArray, start2: Int, end2: Int,
     arrayResult: IntArray, startIndex: Int
