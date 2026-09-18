@@ -27,15 +27,29 @@ fun main() {
 fun quickSort(array: IntArray, left: Int, right: Int) {
     if (left >= right) return
 
-    val middle = left + (right - left) / 2
-    val values = intArrayOf(array[left], array[middle], array[right])
-    values.sort()
-    val value = values[1]
+    if (right - left < 20) {
+        bubbleSort(array, left, right)
+        return
+    }
 
-    val (eq, gr) = partition(array, left, right, value)
+    var l = left
+    var r = right
+    while (l < r) {
+        val middle = l + (r - l) / 2
+        val values = intArrayOf(array[l], array[middle], array[r])
+        values.sort()
+        val value = values[1]
 
-    quickSort(array, left, eq - 1)
-    quickSort(array, gr, right)
+        val (eq, gr) = partition(array, l, r, value)
+
+        if (eq < (l + r) / 2) {
+            quickSort(array, l, eq - 1)
+            l = gr
+        } else {
+            quickSort(array, gr, r)
+            r = eq - 1
+        }
+    }
 }
 
 
@@ -64,4 +78,19 @@ fun partition(array: IntArray, left: Int, right: Int, x: Int): Pair<Int, Int> {
     }
 
     return equals to greatest
+}
+
+
+fun bubbleSort(array: IntArray, left: Int, right: Int) {
+
+    repeat(right - left) {
+        for (index in left..<right - it) {
+
+            if (array[index] > array[index + 1]) {
+                val temp = array[index + 1]
+                array[index + 1] = array[index]
+                array[index] = temp
+            }
+        }
+    }
 }
