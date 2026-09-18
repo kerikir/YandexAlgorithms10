@@ -15,14 +15,31 @@ package blocks.sorting.mergeSort
 
 fun main() {
     val n = readln().trim().toInt()
-    val array1 = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
-    val m = readln().trim().toInt()
-    val array2 = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
+    val array = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
 
-    val result = IntArray(n + m)
-    mergeArrays(array1, 0, array1.lastIndex, array2, 0, array2.lastIndex, result, 0)
+    mergeSort(array, 0, array.lastIndex)
 
-    println(result.joinToString(" "))
+    println(array.joinToString(" "))
+}
+
+
+fun mergeSort(array: IntArray, left: Int, right: Int) {
+    if (left >= right) return
+
+    val middle = (right + left) / 2
+    mergeSort(array, left, middle)
+    mergeSort(array, middle + 1, right)
+
+    val sortedArray = IntArray(right - left + 1)
+    mergeArrays(
+        array, left, middle,
+        array, middle + 1, right,
+        sortedArray, 0
+    )
+
+    for (i in sortedArray.indices) {
+        array[left + i] = sortedArray[i]
+    }
 }
 
 
