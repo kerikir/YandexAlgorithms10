@@ -5,6 +5,7 @@ import java.io.BufferedWriter
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
+import kotlin.random.Random
 
 /*
 
@@ -46,13 +47,13 @@ fun quickSort(array: IntArray, left: Int, right: Int) {
         return
     }
 
+    val random = Random.Default
+
     var l = left
     var r = right
     while (l < r) {
-        val middle = l + (r - l) / 2
-        val values = intArrayOf(array[l], array[middle], array[r])
-        values.sort()
-        val value = values[1]
+        val middle = random.nextInt(l, r + 1)
+        val value = array[middle]
 
         val (eq, gr) = partition(array, l, r, value)
 
