@@ -1,5 +1,19 @@
 package blocks.sorting.mergeSort
 
+/*
+
+Задача: Слияние - реализовать слияние двух отсортированных массивов в один
+
+Сложность = O(N + M)
+Ограничения: 0 <= N <= 1_000_000
+             0 <= M <= 1_000_000
+             -1_000_000_000 <= Ai <= 1_000_000_000
+
+Время = 3s
+Память = 224.89MB
+
+ */
+
 fun main() {
     val n = readln().trim().toInt()
     val array1 = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()

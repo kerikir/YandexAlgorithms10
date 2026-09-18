@@ -13,7 +13,6 @@ package blocks.sorting.quickSort
 
  */
 
-
 fun main() {
     val n = readln().trim().toInt()
     val array = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
