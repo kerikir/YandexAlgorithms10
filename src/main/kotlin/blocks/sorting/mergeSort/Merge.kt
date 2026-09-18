@@ -2,9 +2,9 @@ package blocks.sorting.mergeSort
 
 fun main() {
     val n = readln().trim().toInt()
-    val array1 = readln().trim().split(Regex("\\s+")).map { it.toInt() }.toIntArray()
+    val array1 = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
     val m = readln().trim().toInt()
-    val array2 = readln().trim().split(Regex("\\s+")).map { it.toInt() }.toIntArray()
+    val array2 = readln().trim().split(Regex("\\s+")).filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
 
     val result = IntArray(n + m)
     mergeArrays(array1, 0, array1.lastIndex, array2, 0, array2.lastIndex, result, 0)
