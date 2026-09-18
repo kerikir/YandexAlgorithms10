@@ -31,40 +31,46 @@ fun quickSort(array: IntArray, left: Int, right: Int) {
     var r = right
     while (l < r) {
         val middle = l + (r - l) / 2
-        val value = array[middle]
-        val p = partition(array, l, r) {
-            it <= value
-        }
+        val values = intArrayOf(array[l], array[middle], array[r])
+        values.sort()
+        val value = values[1]
 
-        if (p < (l + r) / 2) {
-            quickSort(array, l, p)
-            l = p + 1
+        val (eq, gr) = partition(array, l, r, value)
+
+        if (eq < (l + r) / 2) {
+            quickSort(array, l, eq - 1)
+            l = gr
         } else {
-            quickSort(array, p + 1, r)
-            r = p
+            quickSort(array, gr, r)
+            r = eq - 1
         }
     }
 }
 
 
-fun partition(array: IntArray, left: Int, right: Int, predicate: (Int) -> Boolean): Int {
-    var l = left
-    var r = right
+fun partition(array: IntArray, left: Int, right: Int, x: Int): Pair<Int, Int> {
+    var equals = left
+    var greatest = left
+    var now = left
 
-    while (l <= r) {
-        while (l <= right && predicate(array[l])) {
-            l++
-        }
-        while (r >= left && !predicate(array[r])) {
-            r--
+    while (now <= right) {
+        if (array[now] < x) {
+            val temp = array[now]
+            array[now] = array[greatest]
+            array[greatest] = array[equals]
+            array[equals] = temp
+            equals++
+            greatest++
+
+        } else if (array[now] == x) {
+            val temp = array[now]
+            array[now] = array[greatest]
+            array[greatest] = temp
+            greatest++
         }
 
-        if (r > l) {
-            val temp = array[l]
-            array[l] = array[r]
-            array[r] = temp
-        }
+        now++
     }
 
-    return l - 1
+    return equals to greatest
 }
