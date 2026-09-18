@@ -1,7 +1,12 @@
 package blocks.sorting.mergeSort
 
 fun main() {
-    
+    val n = readln().trim().toInt()
+    val array = readln().trim().split(Regex("\\s+")).map { it.toInt() }.toIntArray()
+
+    val counterSwaps = bubbleSort(array)
+
+    println(counterSwaps)
 }
 
 
