@@ -24,8 +24,8 @@ fun main() {
 }
 
 
-fun mergeSort(array: IntArray, left: Int, right: Int): Int {
-    if (left >= right) return 0
+fun mergeSort(array: IntArray, left: Int, right: Int): Long {
+    if (left >= right) return 0L
 
     val middle = (right + left) / 2
     val a = mergeSort(array, left, middle)
@@ -50,12 +50,12 @@ fun mergeArrays(
     array1: IntArray, start1: Int, end1: Int,
     array2: IntArray, start2: Int, end2: Int,
     arrayResult: IntArray, startIndex: Int
-): Int {
+): Long {
     var size = (end1 - start1 + 1) + (end2 - start2 + 1)
     var left1 = start1
     var left2 = start2
 
-    var counter = 0
+    var counter = 0L
 
     repeat(size) { index ->
         if (left1 <= end1 && (left2 > end2 || array1[left1] <= array2[left2])) {
