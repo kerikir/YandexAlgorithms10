@@ -1,5 +1,11 @@
 package blocks.sorting.quickSort
 
+import java.io.BufferedReader
+import java.io.BufferedWriter
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
+
 /*
 
 Задача: Быстрая сортировка - отсортировать массив чисел
@@ -15,12 +21,20 @@ package blocks.sorting.quickSort
 
 
 fun main() {
-    val n = readln().trim().toInt()
-    val array = readln().trim().split(' ').filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
+    val reader = BufferedReader(FileReader(File("input.txt")))
+    val writer = BufferedWriter(FileWriter(File("output.txt")))
+
+    val n = reader.readLine().trim().toInt()
+    val array = reader.readLine().trim().split(' ').filter { it.isNotEmpty() }.map { it.toInt() }.toIntArray()
 
     quickSort(array, 0, array.lastIndex)
 
-    println(array.joinToString(" "))
+    for (i in array.indices) {
+        writer.write("${array[i]} ")
+    }
+
+    reader.close()
+    writer.close()
 }
 
 
