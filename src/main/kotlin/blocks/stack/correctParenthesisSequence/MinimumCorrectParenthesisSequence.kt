@@ -15,13 +15,15 @@ fun main() {
         ')' to '('
     )
 
-    val stack = ArrayDeque<Char>()
+    val stackArray = CharArray(n)
+    var top = 0
+
     for (char in string) {
         if (char in closingParenthesis) {
-            if (stack.isNotEmpty())
-                stack.removeLast()
+            if (top > 0)
+                top--
         } else {
-            stack.addLast(char)
+            stackArray[top++] = char
         }
     }
 
@@ -31,15 +33,14 @@ fun main() {
     while (remain > 0) {
 
         for (ch in parenthesis) {
-
-            if (ch in closingParenthesis && stack.isNotEmpty() && stack.last() == closingParenthesis[ch]) {
+            if (ch in closingParenthesis && top > 0 && stackArray[top - 1] == closingParenthesis[ch]) {
                 result.append(ch)
-                stack.removeLast()
+                top--
                 break
 
-            } else if (ch !in closingParenthesis && remain >= stack.size + 2) {
+            } else if (ch !in closingParenthesis && remain >= top + 2) {
                 result.append(ch)
-                stack.addLast(ch)
+                stackArray[top++] = ch
                 break
             }
         }
