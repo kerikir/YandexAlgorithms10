@@ -19,7 +19,10 @@ fun main() {
             }
 
             '1' -> {
-
+                val number = heap.first()
+                siftingDown(heap)
+                heap.removeLast()
+                result.add(number)
             }
         }
     }
@@ -40,6 +43,40 @@ fun siftingUp(array: MutableList<Int>) {
 
         } else {
             break
+        }
+    }
+}
+
+
+fun siftingDown(array: MutableList<Int>) {
+    var index = 0
+    array[index] = array[array.lastIndex]
+
+    while (index < array.lastIndex) {
+        val child1 = 2 * index + 1
+        val child2 = 2 * index + 2
+
+        when {
+            child2 < array.size && (array[child1] > array[index] || array[child2] > array[index]) -> {
+
+                if (array[child1] > array[child2]) {
+                    array[index] = array[child1].also { array[child1] = array[index] }
+                    index = child1
+
+                } else {
+                    array[index] = array[child2].also { array[child2] = array[index] }
+                    index = child2
+                }
+            }
+
+            child2 == array.size && array[child1] > array[index] -> {
+                array[index] = array[child1].also { array[child1] = array[index] }
+                index = child1
+            }
+
+            else -> {
+                break
+            }
         }
     }
 }
