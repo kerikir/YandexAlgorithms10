@@ -1,5 +1,17 @@
 package blocks.queueAndDeque.heapImplement
 
+/*
+
+Задача: Хипуй - реализовать кучу с наибольшими числами
+
+Сложность = O(N * logN)
+Ограничения: 1 <= N <= 100_000
+
+Время = 532ms
+Память = 40.24MB
+
+ */
+
 fun main() {
     val n = readln().trim().toInt()
     val commands = mutableListOf<String>()
