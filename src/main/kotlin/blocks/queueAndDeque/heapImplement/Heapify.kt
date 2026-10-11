@@ -15,6 +15,7 @@ fun main() {
             '0' -> {
                 val number = command.substring(2).toInt()
                 heap.add(number)
+                siftingUp(heap)
             }
 
             '1' -> {
@@ -24,4 +25,21 @@ fun main() {
     }
 
     println(result.joinToString("\n"))
+}
+
+
+fun siftingUp(array: MutableList<Int>) {
+    var index = array.lastIndex
+
+    while (index > 0) {
+        val parent = (index - 1) / 2
+
+        if (array[parent] < array[index]) {
+            array[index] = array[parent].also { array[parent] = array[index] }
+            index = parent
+
+        } else {
+            break
+        }
+    }
 }
