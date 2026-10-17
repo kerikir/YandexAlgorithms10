@@ -11,18 +11,23 @@ fun main() {
     }
     blocks.sortBy { it.second }
 
-    val result = mutableListOf<Int>()
+    val rows = mutableMapOf<Int, ArrayList<Int>>()
+    val heap = PriorityQueue<Pair<Int, Int>>(
+        compareBy { it.second }
+    )
 
-    val heap = PriorityQueue<Int>()
-    heap.add(blocks.first().third)
+    heap.add(0 to blocks.first().third)
+    rows[0] = arrayListOf(blocks.first().first)
     repeat(n - 1) {
 
-        if (heap.peek() <= blocks[it + 1].second) {
-            heap.poll()
-            heap.add(blocks[it + 1].third)
+        if (heap.peek().second <= blocks[it + 1].second) {
+            val (row, _) = heap.poll()
+            heap.add(row to blocks[it + 1].third)
+            rows[row]?.add(blocks[it + 1].first)
 
         } else {
-            heap.add(blocks[it + 1].third)
+            heap.add(heap.size to blocks[it + 1].third)
+            rows[heap.size] = arrayListOf(blocks[it + 1].first)
         }
     }
 
