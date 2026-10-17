@@ -31,5 +31,14 @@ fun main() {
         }
     }
 
+    val result = IntArray(n)
+    var index = 1
+    for (row in rows.values) {
+        for (block in row) {
+            result[block - 1] = index
+            index++
+        }
+    }
     println(heap.size)
+    println(result.joinToString(" "))
 }
