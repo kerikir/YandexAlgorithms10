@@ -3,6 +3,18 @@ package blocks.queueAndDeque.heapImplement
 import java.util.Locale
 import java.util.PriorityQueue
 
+/*
+
+Задача: Коммерческий калькулятор - определение стоимости вычисления суммы чисел
+
+Сложность = O(N * logN)
+Ограничения: 2 <= N <= 100_000
+
+Время = 593ms
+Память = 41.18MB
+
+ */
+
 fun main() {
     val n = readln().trim().toInt()
     val array = readln().trim().split(Regex("\\s+")).map { it.toInt() }.toIntArray()
